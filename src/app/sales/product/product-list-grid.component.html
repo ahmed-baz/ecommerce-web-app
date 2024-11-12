@@ -1,0 +1,80 @@
+<!-- MAIN CONTENT-->
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <app-search></app-search>
+      <hr />
+      <div class="row">
+        <!-- START LOOP -->
+        <div *ngFor="let product of productList" class="col-md-3">
+          <div class="product-box">
+            <a routerLink="/product-details/{{ product.id }}">
+              <img
+                src="{{ product.imageUrl }}"
+                class="img-responsive"
+                width="150"
+              />
+            </a>
+            <a routerLink="/product-details/{{ product.id }}">
+              <h1>{{ product.name }}</h1>
+            </a>
+            <div class="price">{{ product.unitPrice | currency: "USD" }}</div>
+            <button (click)="addToCart(product)" class="btn btn-primary btn-sm">
+              Add to cart
+            </button>
+            <button
+              style="margin: 1px"
+              (click)="removeFromCart(product)"
+              class="btn btn-danger btn-sm"
+            >
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+
+        <div
+          *ngIf="productList?.length == 0"
+          class="alert alert-danger col-md-12"
+          role="alert"
+        >
+          No data found
+        </div>
+        <!-- END OF LOOP -->
+      </div>
+
+      <!-- begin footer -->
+      <div class="footer-pagination">
+        <div class="row">
+          <div class="col-md-6"></div>
+
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9" style="padding-left: 20px">
+                <ngb-pagination
+                  [(page)]="thePageNumber"
+                  [pageSize]="thepageSize"
+                  [collectionSize]="theTotalElements"
+                  [maxSize]="5"
+                  [boundaryLinks]="true"
+                  (pageChange)="findProductList()"
+                >
+                </ngb-pagination>
+              </div>
+
+              <div style="text-align: right; margin-top: 22px">
+                <span class="mr-2">Page Size</span>
+                <select (change)="updatePageSize($event.target.value)">
+                  <option selected="true">8</option>
+                  <option>16</option>
+                  <option>32</option>
+                  <option>64</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end footer -->
+    </div>
+  </div>
+</div>

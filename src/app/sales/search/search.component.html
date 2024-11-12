@@ -1,0 +1,14 @@
+<form class="form-header" onsubmit="return false;" method="GET">
+  <input
+    class="au-input au-input-xl"
+    type="text"
+    name="keyword"
+    placeholder="Search for data ..."
+    #inputKeyword
+    [(ngModel)]="keyword"
+    (keyup)="search()"
+  />
+  <button class="au-btn-submit" (click)="search(); inputKeyword.value = ''">
+    Search
+  </button>
+</form>

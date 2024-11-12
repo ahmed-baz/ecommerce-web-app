@@ -1,0 +1,42 @@
+<hr />
+<div class="container">
+  <div style="margin-left: 950px">
+    <button
+      style="width: 160px; padding: 2px"
+      class="btn-primary"
+      (click)="addProduct()"
+    >
+      Add New Product
+    </button>
+  </div>
+  <hr />
+  <div class="card">
+    <table class="table table-hover">
+      <thead class="thead thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">Price</th>
+          <th scope="col">units In Stock</th>
+          <th scope="col">Category</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productList; let i = index">
+          <th class="align-middle">{{ i + 1 }}</th>
+          <td class="align-middle">{{ product.name }}</td>
+          <td class="align-middle">
+            {{ product.unitPrice | currency: "USD" }}
+          </td>
+          <td class="align-middle">{{ product.unitsInStock }}</td>
+          <td class="align-middle">{{ product.category.categoryName }}</td>
+          <td class="align-middle"></td>
+          <td class="align-middle">
+            <img src="{{ product.imageUrl }}" height="200" width="200"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,377 @@
+<div class="main-content page-m">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <form [formGroup]="checkoutForm">
+        <!-- customer group -->
+        <div formGroupName="customer" class="form-area">
+          <h3>Customer</h3>
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="FirstName"
+                class="form-control"
+                id="firstName"
+                name="firstName"
+                placeholder="First Name"
+              />
+            </div>
+            <div
+              *ngIf="
+                !formSignUp.controls.FirstName.valid &&
+                formSignUp.controls.FirstName.dirty
+              "
+            >
+              <small
+                class="text-danger form-text"
+                *ngIf="formSignUp.controls.FirstName.errors.required"
+                >First Name Required</small
+              >
+              <small
+                class="form-text text-danger"
+                *ngIf="formSignUp.controls.FirstName.errors.pattern"
+                >Only Characters</small
+              >
+              <small
+                class="form-text text-danger"
+                *ngIf="formSignUp.controls.FirstName.errors.maxlength"
+                >Max Length 20 Characters</small
+              >
+              <small
+                class="form-text text-danger"
+                *ngIf="formSignUp.controls.FirstName.errors.minlength"
+                >Min Length 3 Characters</small
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="LastName"
+                class="form-control"
+                id="lastName"
+                name="lastName"
+                placeholder="Last Name"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="Email"
+                class="form-control"
+                id="email"
+                name="email"
+                aria-describedby="emailHelp"
+                placeholder="Email Address"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="Mobile"
+                class="form-control"
+                id="Mobile"
+                name="Mobile"
+                placeholder="Mobile Number"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- end customer  -->
+        <!-- shipping Address group -->
+        <div formGroupName="shippingAddress" class="form-area">
+          <h3>Shipping Address</h3>
+          <div class="form-group">
+            <div class="input-space">
+              <ng-select
+                type="text"
+                name="country"
+                formControlName="Country"
+                class="form-control"
+                id="country"
+                [searchable]="true"
+                [items]="countryList"
+                bindLabel="name"
+                [(ngModel)]="selectedCountryItem"
+                required
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                formControlName="City"
+                class="form-control"
+                id="city"
+                name="city"
+              >
+                <option>CITY TODO</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                name="area"
+                formControlName="Area"
+                class="form-control"
+                id="area"
+              >
+                <option>Area TODO</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="Street"
+                class="form-control"
+                id="street"
+                name="street"
+                placeholder="Street"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="ZipCode"
+                class="form-control"
+                id="zipCode"
+                name="postCode"
+                placeholder="Post Code"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="input-space">
+          <label class="au-checkbox">
+            <input
+              type="checkbox"
+              (change)="copyShippingAddressToBillingAddress($event)"
+            />
+            <span class="au-checkmark"></span>Billing Address same as Shipping
+            Address
+          </label>
+        </div>
+        <!-- end shipping Address  -->
+        <!-- shipping Address group -->
+        <div formGroupName="billingAddress" class="form-area">
+          <h3>Billing Address</h3>
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                name="country"
+                formControlName="Country"
+                class="form-control"
+                id="country"
+              >
+                <option selected="selected">country TODO</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                name="city"
+                formControlName="City"
+                class="form-control"
+                id="city"
+              >
+                <option selected="selected">CITY TODO</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                name="area"
+                formControlName="Area"
+                class="form-control"
+                id="arae"
+              >
+                <option>Area TODO</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="Street"
+                class="form-control"
+                id="street"
+                name="street"
+                placeholder="Street"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                formControlName="ZipCode"
+                class="form-control"
+                id="zipCode"
+                name="zipCode"
+                placeholder="Post Code"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- end shipping Address  -->
+
+        <!-- credit Card group -->
+        <div formGroupName="creditCard" class="form-area">
+          <h3>Credit Card</h3>
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                name="cardType"
+                formControlName="cardType"
+                class="form-control"
+                id="cardType"
+              >
+                <option selected="selected">Card Type</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                name="nameOnCard"
+                formControlName="nameOnCard"
+                class="form-control"
+                id="name On Card"
+                placeholder="Name On Card"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                name="cardNumber"
+                formControlName="cardNumber"
+                class="form-control"
+                id="cardNumber"
+                placeholder="Card Number"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <input
+                type="text"
+                name="securityCode"
+                formControlName="securityCode"
+                class="form-control"
+                id="securityCode"
+                placeholder="Security Code"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                name="expirationMonth"
+                formControlName="expirationMonth"
+                class="form-control"
+                id="expirationMonth"
+              >
+                <option selected="selected">expiration Month</option>
+                <option>Jan</option>
+                <option>Feb</option>
+                <option>Mar</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-space">
+              <select
+                name="expirationYear"
+                formControlName="expirationYear"
+                class="form-control"
+                id="expirationYear"
+              >
+                <option selected="selected">expiration Year</option>
+                <option>2020</option>
+                <option>2021</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- end credit Card  -->
+        <!-- review your order  -->
+        <div class="form-area">
+          <h3>Review Your Order</h3>
+          <table class="table table-bordered">
+            <tr>
+              <td>Total Quantity</td>
+              <td>{{ totalQuantity }}</td>
+            </tr>
+            <tr>
+              <td>Shipping</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <td>Total Price</td>
+              <td>{{ totalPrice | currency: "USD" }}</td>
+            </tr>
+          </table>
+        </div>
+        <!-- end review your order  -->
+
+        <div class="text-center">
+          <button
+            [disabled]="!formSignUp.valid"
+            type="submit"
+            (click)="checkOut()"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

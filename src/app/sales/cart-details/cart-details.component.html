@@ -1,0 +1,118 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div *ngIf="cartItems?.length > 0">
+        <table class="table table-bordered">
+          <tr>
+            <th class="td-style" widtg="20%">Product image</th>
+            <th class="td-style" widtg="50%">Product Details</th>
+            <th class="td-style" widtg="30%">Quantity</th>
+          </tr>
+          <tr class="td-style" *ngFor="let item of cartItems">
+            <td>
+              <img
+                src="{{ item.imageUrl }}"
+                class="img-responsve"
+                width="200px"
+              />
+            </td>
+            <td>
+              <p>{{ item.name }}</p>
+              <p>{{ item.unitPrice | currency: "USD" }}</p>
+            </td>
+            <td>
+              <div class="items">
+                <table class="table table-pordered">
+                  <tr class="td-style">
+                    <td>
+                      <button
+                        (click)="incrementCartItem(item)"
+                        class="btn btn-primary btn-sm"
+                      >
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </td>
+                    <td style="font-weight: bold">
+                      <div>{{ item.quantity }}</div>
+                    </td>
+                    <td>
+                      <button
+                        (click)="decrementCartItem(item)"
+                        class="btn btn-danger btn-sm"
+                      >
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="td-style">
+                    <td>SubTotal</td>
+                    <td style="font-weight: bold">
+                      {{ item.quantity * item.unitPrice | currency: "USD" }}
+                    </td>
+                    <td>
+                      <button
+                        (click)="removeFromCartItem(item)"
+                        class="btn btn-danger btn-sm"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td style="font-weight: bold">
+              <table class="table table-pordered" style="text-align: center">
+                <tr>
+                  <td>Total Quantity</td>
+                  <td>{{ totalQuantity }}</td>
+                </tr>
+                <tr>
+                  <td>Shipping</td>
+                  <td>Free</td>
+                </tr>
+                <tr>
+                  <td>Total Price</td>
+                  <td>{{ totalPrice | currency: "USD" }}</td>
+                </tr>
+                <tr>
+                  <td class="td-style">
+                    <button
+                      style="width: 120px"
+                      (click)="deflateCartItem()"
+                      class="btn btn-danger btn-sm"
+                    >
+                      Deflate Cart Item
+                    </button>
+                  </td>
+                  <td class="td-style">
+                    <button
+                      routerLink="/checkout"
+                      style="width: 120px"
+                      class="btn btn-primary btn-sm"
+                    >
+                      Checkout
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div
+        *ngIf="cartItems?.length == 0"
+        class="alert alert-warning col-md-12"
+        role="alert"
+        style="text-align: center"
+      >
+        <p>Your shopping cart is empty</p>
+        <a routerLink="/products" class="mt-5">Back to products</a>
+      </div>
+    </div>
+  </div>
+</div>
